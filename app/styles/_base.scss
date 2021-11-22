@@ -1,0 +1,49 @@
+/* Colour pallette */
+
+$surface-dark: hsl(210, 15%, 15%);
+$surface-light: hsl(201, 100%, 44%);
+$accent-blue: hsl(189, 74%, 48%);
+$accent-yellow: hsl(55, 100%, 71%);
+$neutral-dark: hsl(210, 15%, 15%);
+$neutral-light: hsl(0, 0%, 100%);
+
+/* Font weights */
+
+$font-weight-boldest: 900;
+$font-weight-extra-bold: 800;
+$font-weight-bolder: 600;
+$font-weight-bold: 700;
+$font-weight-a-bit-bold: 500;
+$font-weight-normal: 400;
+
+/* Font sizes : 
+ *
+ * Font sizes in the mock-up have a lot of variation so there's no point creating SCSS variables for it.
+ *
+*/
+
+/* Font faces :
+ *
+ * In the mock-up, the are two font families used, one of which is Stratos. However this is a premium font and so I will not be using it. 
+ *
+*/
+@font-face {
+    font-family: 'Heebo';
+    src: url(../../public/fonts/Heebo-VariableFont_wght.ttf) format('truetype');
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* 1px = 1rem, we need to respect the user preferred font size, since the design is mobile-oriented, therefore, we use rem. */
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'Heebo', sans-serif;
+    background: $surface-dark;
+    /* We have not been given a background, so we create something almost like the background in the mock-up. */
+    background: linear-gradient(90deg, $surface-dark 21%, hsl(327, 84%, 63%) 48%);
+}
