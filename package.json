@@ -19,5 +19,8 @@
   "homepage": "https://github.com/dimitris-development/safesize-engagement-screen#readme",
   "devDependencies": {
     "sass": "^1.43.4"
+  },
+  "dependencies": {
+    "include-media": "^1.4.10"
   }
 }

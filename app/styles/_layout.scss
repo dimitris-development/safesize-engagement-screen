@@ -1,0 +1,160 @@
+.plp-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 2.52rem;
+    padding-top: 2.28rem;
+    padding-right: 2.52rem;
+    gap: 4rem;
+    .head-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        @include media("<target") {
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 2rem;
+        }
+        @include media(">=target") {
+            flex-direction: row;
+            gap: 12.2rem;
+        }
+        
+        .greeting {
+            font-size: 3.38rem;
+            color: $neutral-light;
+            letter-spacing: 0.068rem;
+            font-weight: $font-weight-boldest;
+            @include media(">=small-phone", "<target") {
+                font-size: 2.7rem;
+            }
+            .highlight {
+                font-size: 2rem;
+                letter-spacing: 0.044rem;
+                font-weight: $font-weight-extra-bold;
+                color: $accent-blue;
+                font-style: italic;
+                padding-left: 0.71rem;
+                text-transform: uppercase;
+                @include media(">=small-phone", "<target") {
+                    display: inline-block;
+                    text-transform: capitalize;
+                    font-style: normal;
+                    padding-left: 0rem;
+                    font-size: 2.7rem;
+                }
+            }
+        }
+        
+        .subheader {
+            font-size: 2.4rem;
+            color: $neutral-light;
+            font-weight: $font-weight-bolder;
+        }
+    }
+    .body-container {
+        display: flex;
+        flex-direction: row;
+        .suggestion-bar {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-evenly;
+            align-items: center;
+            .suggestion-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                max-width: 9.4rem;
+                gap: 0.7rem;
+                .suggestion-icon {
+                    width: 4.76rem;
+                    height: 4.76rem;
+                }
+                .suggestion-text{
+                    color: $neutral-light;
+                    font-weight: $font-weight-a-bit-bold;
+                    font-size: 1.4rem;
+                    text-align: center;
+                }
+            }
+            
+        }
+        
+    }
+    .recommendation-list {
+        background-color: $surface-dark;
+        height: 60vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.98rem;
+        padding-top: 0.91rem;
+        @include media("<tablet") {
+            align-self: center;
+        }
+        .recommendation-title {
+            color: $neutral-light;
+            font-weight: $font-weight-a-bit-bold;
+            font-size: 2.3rem;
+            font-style: italic;
+        }
+        .recommendation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-auto-rows: 1fr;
+            gap: 0.58rem;
+            padding-left: 3.37rem;
+            padding-right: 3.37rem;
+            overflow-y: auto;
+            @include media("<tablet") {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            @include media(">=tablet", "<desktop") {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1rem;
+            }
+            @include media(">=desktop") {
+                grid-template-columns: repeat(6, 1fr);
+                gap: 2rem;
+            }
+        }
+    }
+}
+
+.pdp-container {
+    position: relative;
+    left:0px;
+    transition: left 0.5s;
+    .match-container {
+        position: absolute;
+        background-color: $neutral-light;
+        border-top: 0.91rem solid $neutral-dark;
+        right: 0px;
+        top: 13.4rem;
+        width: 12.81rem;
+        height: 9.4rem;
+        color: $neutral-dark;
+        .match-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            .match-number {
+                font-weight: $font-weight-boldest;
+                font-size: 4.27rem;
+            }
+            .match-text {
+                font-weight: $font-weight-bold;
+                font-size: 1.7rem;
+            }
+            .match-percent {
+                font-weight: $font-weight-bold;
+                font-size: 2.62rem;
+                display: inline-block;
+            }
+        }
+    }
+}
