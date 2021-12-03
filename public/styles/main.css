@@ -445,6 +445,7 @@ body {
   .pdp-container .modal-container .modal-content .fitting-list-container-on-phone-large {
     display: flex;
     flex-direction: row;
+    width: 100%;
     justify-content: space-around;
   }
 }
@@ -551,8 +552,10 @@ body {
   }
 }
 
-.sidenav-on-large-phone-container {
-  padding: 1.5rem;
+@media (min-width: 26.5725em) {
+  .sidenav-on-large-phone-container {
+    padding: 1.5rem;
+  }
 }
 .sidenav-on-large-phone-container .sidenav-on-large-phone {
   display: none;

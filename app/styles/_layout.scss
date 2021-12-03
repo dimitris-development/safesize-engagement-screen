@@ -243,6 +243,7 @@
                 @include media('>large-phone') {
                     display: flex;
                     flex-direction: row;
+                    width: 100%;
                     justify-content: space-around;
                 }
             }

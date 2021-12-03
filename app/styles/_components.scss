@@ -99,7 +99,9 @@
 }
 
 .sidenav-on-large-phone-container {
-    padding: u(3);
+    @include media('>large-phone') {
+        padding: u(3);
+    }
     .sidenav-on-large-phone {
         display: none;
         @include media('>large-phone') {
