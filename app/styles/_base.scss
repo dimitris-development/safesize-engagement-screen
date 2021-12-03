@@ -1,7 +1,9 @@
+@use 'sass:math';
 /* Colour pallette */
 
 $surface-dark: hsl(210, 15%, 15%);
 $surface-light: hsl(201, 100%, 44%);
+$surface-light-secondary: hsl(198, 100%, 43%);
 $accent-blue: hsl(189, 74%, 48%);
 $accent-yellow: hsl(55, 100%, 71%);
 $neutral-dark: hsl(210, 15%, 15%);
@@ -9,20 +11,79 @@ $neutral-light: hsl(0, 0%, 100%);
 
 /* Font weights */
 
-$font-weight-boldest: 900;
-$font-weight-extra-bold: 800;
-$font-weight-bolder: 600;
-$font-weight-bold: 700;
-$font-weight-a-bit-bold: 500;
-$font-weight-normal: 400;
+$font-weight-boldest: 900; // boldest
+$font-weight-extra-bold: 800; //medium-bold
+$font-weight-bold: 700; // bold
+$font-weight-a-bit-bolder: 600; // medium
+$font-weight-a-bit-bold: 500; // light
+$font-weight-normal: 400; // lightest
 
-$breakpoints: (small-phone: 320px, medium-phone: 375px, target: 521px, tablet: 768px, desktop: 1024px);
+$font-weights: (
+    "lightest": 400,
+    "light"   : 500,
+    "medium"   : 600,
+    "bold"     : 700,
+    "medium-bold": 800,
+    "boldest"   : 900
+);
 
-/* Font sizes : 
- *
- * Font sizes in the mock-up vary so there's no point creating SCSS variables for them.
- *
-*/
+@each $name, $weight in $font-weights {
+    .font-weight-#{$name} {
+        font-weight: $weight;
+    }
+}
+
+/* For media mixin */
+
+$small-phone: 20em;
+$medium-phone: 23.4375em;
+$large-phone: 26.5625em;
+$tablet: 48em;
+$desktop: 64em;
+
+$breakpoints: (
+    "small-phone": $small-phone, 
+    "medium-phone": $medium-phone,
+    "large-phone" : $large-phone,
+    "tablet": $tablet, 
+    "desktop": $desktop
+);
+
+/* Font sizes */
+
+
+$font-size: 1rem;
+$ratio : 1.414;
+$default: $font-size;
+$small : math.div($default, $ratio);
+$smaller : math.div($small, $ratio);
+$smallest : math.div($smaller, $ratio); 
+$h6 : $default * $ratio;
+$h5 : $h6 * $ratio;
+$h4 : $h5 * $ratio;
+$h3 : $h4 * $ratio;
+$h2 : $h3 * $ratio;
+$h1 : $h2 * $ratio;
+
+$font-sizes: (
+    "smallest": $smallest,
+    "smaller": $smaller,
+    "small": $small,
+    "default": $default,
+    "h6": $h6,
+    "h5": $h5,
+    "h4": $h4,
+    "h3": $h3,
+    "h2": $h2,
+    "h1": $h1
+);
+
+@each $name, $size in $font-sizes {
+    .font-size-#{$name} {
+        font-size: $size;
+    }
+}
+
 
 /* Font faces :
  *
@@ -38,12 +99,113 @@ $breakpoints: (small-phone: 320px, medium-phone: 375px, target: 521px, tablet: 7
     box-sizing: border-box;
 }
 
+/* Spacing */
+
+$spacer: 1rem;
+$spacers: ();
+
+$spacer-ratio: 0.5;
+@for $i from 0 through 50 {
+    $spacers : map-merge($spacers, ($i : $spacer * $i * $spacer-ratio))
+}
+
+// @include media("<=small-phone") {
+//     @each $prop, $abbrev in ("margin": "m", "padding": "p") {
+//         @each $size, $length in $spacers {
+//             .#{$abbrev}-xs-#{$size}  { #{$prop}:        $length !important; }
+//             .#{$abbrev}t-xs-#{$size} { #{$prop}-top:    $length !important; }
+//             .#{$abbrev}r-xs-#{$size} { #{$prop}-right:  $length !important; }
+//             .#{$abbrev}b-xs-#{$size} { #{$prop}-bottom: $length !important; }
+//             .#{$abbrev}l-xs-#{$size} { #{$prop}-left:   $length !important; }
+//             .#{$abbrev}x-xs-#{$size} { #{$prop}-left:   $length !important; #{$prop}-right:  $length !important; }
+//             .#{$abbrev}y-xs-#{$size} { #{$prop}-top:   $length !important; #{$prop}-bottom:  $length !important; }
+//         }
+//     }
+// }
+
+// @include media(">small-phone", "<=medium-phone") {
+//     @each $prop, $abbrev in ('margin': "m", "padding": "p") {
+//         @each $size, $length in $spacers {
+//             .#{$abbrev}-sm-#{$size}  { #{$prop}:        $length !important; }
+//             .#{$abbrev}t-sm-#{$size} { #{$prop}-top:    $length !important; }
+//             .#{$abbrev}r-sm-#{$size} { #{$prop}-right:  $length !important; }
+//             .#{$abbrev}b-sm-#{$size} { #{$prop}-bottom: $length !important; }
+//             .#{$abbrev}l-sm-#{$size} { #{$prop}-left:   $length !important; }
+//             .#{$abbrev}x-sm-#{$size} { #{$prop}-left:   $length !important; #{$prop}-right:  $length !important; }
+//             .#{$abbrev}y-sm-#{$size} { #{$prop}-top:   $length !important; #{$prop}-bottom:  $length !important; }
+//         }
+//     }
+// }
+
+// @include media(">medium-phone", "<=tablet") {
+//     @each $prop, $abbrev in ("margin": "m", "padding": "p") {
+//         @each $size, $length in $spacers {
+//             .#{$abbrev}-lg-#{$size}  { #{$prop}:        $length !important; }
+//             .#{$abbrev}t-lg-#{$size} { #{$prop}-top:    $length !important; }
+//             .#{$abbrev}r-lg-#{$size} { #{$prop}-right:  $length !important; }
+//             .#{$abbrev}b-lg-#{$size} { #{$prop}-bottom: $length !important; }
+//             .#{$abbrev}l-lg-#{$size} { #{$prop}-left:   $length !important; }
+//             .#{$abbrev}x-lg-#{$size} { #{$prop}-left:   $length !important; #{$prop}-right:  $length !important; }
+//             .#{$abbrev}y-lg-#{$size} { #{$prop}-top:   $length !important; #{$prop}-bottom:  $length !important; }
+//         }
+//     }
+// }
+
+// @include media(">tablet", "<=desktop") {
+//     @each $prop, $abbrev in ("margin": "m", "padding": "p") {
+//         @each $size, $length in $spacers {
+//             .#{$abbrev}-xl-#{$size}  { #{$prop}:        $length !important; }
+//             .#{$abbrev}t-xl-#{$size} { #{$prop}-top:    $length !important; }
+//             .#{$abbrev}r-xl-#{$size} { #{$prop}-right:  $length !important; }
+//             .#{$abbrev}b-xl-#{$size} { #{$prop}-bottom: $length !important; }
+//             .#{$abbrev}l-xl-#{$size} { #{$prop}-left:   $length !important; }
+//             .#{$abbrev}x-xl-#{$size} { #{$prop}-left:   $length !important; #{$prop}-right:  $length !important; }
+//             .#{$abbrev}y-xl-#{$size} { #{$prop}-top:   $length !important; #{$prop}-bottom:  $length !important; }
+//         }
+//     }
+// }
+
+// @each $prop, $abbrev in ("margin": "m", "padding": "p") {
+//     @each $size, $length in $spacers {
+//         .#{$abbrev}-#{$size}  { #{$prop}:        $length !important; }
+//         .#{$abbrev}t-#{$size} { #{$prop}-top:    $length !important; }
+//         .#{$abbrev}r-#{$size} { #{$prop}-right:  $length !important; }
+//         .#{$abbrev}b-#{$size} { #{$prop}-bottom: $length !important; }
+//         .#{$abbrev}l-#{$size} { #{$prop}-left:   $length !important; }
+//         .#{$abbrev}x-#{$size} { #{$prop}-left:   $length !important; #{$prop}-right:  $length !important; }
+//         .#{$abbrev}y-#{$size} { #{$prop}-top:   $length !important; #{$prop}-bottom:  $length !important; }
+//     }
+// }
+
+@function u($unit) {
+    @return map-get($spacers, $unit);
+}
+
+$font-size-unit : (
+    "-3" : $smallest,
+    "-2" : $smaller,
+    "-1" : $small,
+    "0"  : $default,
+    "1"  : $h6,
+    "2"  : $h5,
+    "3"  : $h4,
+    "4"  : $h3,
+    "5"  : $h2,
+    "6"  : $h1
+);
+
+
+@function font-size($unit) {
+    @return map-get($font-size-unit, $unit);
+}
+
 html, body {
     height: 100%;
 }
-/* 1px = 1rem, we need to respect the user preferred font size therefore, we use rem. */
-html {
-    font-size: 62.5%;
+
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Just make scrollbar invisible */
 }
 
 body {
